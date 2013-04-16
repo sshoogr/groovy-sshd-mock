@@ -47,7 +47,7 @@ drwxr-xr-x 3 1100 1100 4096 Aug  7 16:49 examples
       callback.onExit(0)
     }
 
-    // Create command expectations.
+    // Create file expectations.
     dir('/tmp/puppet')
 
     // Start server.
