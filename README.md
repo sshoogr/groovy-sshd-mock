@@ -26,12 +26,14 @@ Then you can use `command`, `file` and `dir` methods to define SSH server expect
     // Create file expectations.
     dir('/tmp/puppet')
 
-As you can notice closure passed to command method takes 5 parameters that allow you influencing the behavior of the 
-mocked remote command. The `inp`, `out`, `err` parameters are command's standard input, standard output and standard 
-error streams. The `callback` parameter allows setting exit code for the mocked command to return. The `env` parameter 
-gives you access to command's environment variables, which will most likely will be useless in a mocked environment.  
+As you can notice, the closure passed to the `command` method takes 5 parameters that allow influencing the 
+behavior of the mocked remote command. 
 
-After that is done you can start the mock server on a specific port (e.g. 2323) and execute your SSH code against that:
+The `inp`, `out`, `err` parameters are command's standard input, standard output and standard error streams. 
+The `callback` parameter allows setting exit code for the mocked command to return. The `env` parameter gives you 
+access to command's environment variables, which will most likely will be useless in a mocked environment.  
+
+After that is done you can start the mock server on a specific port (e.g. `2323`) and execute your SSH code against that:
 
     // Start server.
     startSshd(2323)
