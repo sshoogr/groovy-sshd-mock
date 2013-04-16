@@ -43,7 +43,6 @@ class MockCommand implements org.apache.sshd.server.Command {
   }
 
   def void start(Environment env) throws IOException {
-    println "Executing $command"
     Closure commandCode
     if (command) {
       commandCode = MockSshServer.commands.find { command == it.key || command.matches(it.key) }?.value
@@ -51,7 +50,6 @@ class MockCommand implements org.apache.sshd.server.Command {
     if (commandCode) {
       commandCode(inp, out, err, callback, env)
     } else {
-      println "Unknown command: $command"
       err << "Unknown command: $command"
       callback.onExit(-1)
     }
