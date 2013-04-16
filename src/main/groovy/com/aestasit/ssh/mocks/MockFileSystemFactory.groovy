@@ -12,7 +12,7 @@ import org.apache.sshd.server.FileSystemView
  */
 class MockFileSystemFactory implements FileSystemFactory {
 
-  public FileSystemView createFileSystemView(Session session) throws IOException {
-    return new MockFileSystemView()
+  def FileSystemView createFileSystemView(Session session) throws IOException {
+    new MockFileSystemView()
   }
 }

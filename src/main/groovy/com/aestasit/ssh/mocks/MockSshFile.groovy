@@ -10,107 +10,107 @@ import org.apache.sshd.server.SshFile
  */
 class MockSshFile implements SshFile {
 
-  private final String file
+  private final String file
   private final SshFile baseDir
 
-  public MockSshFile(String file) {
+  def MockSshFile(String file) {
     super()
     this.file = file
   }
 
-  public MockSshFile(SshFile baseDir, String file) {
+  def MockSshFile(SshFile baseDir, String file) {
     super()
     this.baseDir = baseDir
     this.file = file
   }
 
-  public String getAbsolutePath() {
-    return file
+  def String getAbsolutePath() {
+    file
   }
 
-  public String getName() {
-    return file
+  def String getName() {
+    file
   }
 
-  public String getOwner() {
-    return "root"
+  def String getOwner() {
+    "root"
   }
 
-  public boolean isDirectory() {
-    return MockSshServer.files[file]['isDirectory']
+  def boolean isDirectory() {
+    MockSshServer.files[file]['isDirectory']
   }
 
-  public boolean isFile() {
-    return !MockSshServer.files[file]?.getAt('isDirectory')
+  def boolean isFile() {
+    !MockSshServer.files[file]?.getAt('isDirectory')
   }
 
-  public boolean doesExist() {
-    return MockSshServer.files[file]?.getAt('doesExist')
+  def boolean doesExist() {
+    MockSshServer.files[file]?.getAt('doesExist')
   }
 
-  public boolean isReadable() {
-    return true
+  def boolean isReadable() {
+    true
   }
 
-  public boolean isWritable() {
-    return true
+  def boolean isWritable() {
+    true
   }
 
-  public boolean isExecutable() {
-    return true
+  def boolean isExecutable() {
+    true
   }
 
-  public boolean isRemovable() {
-    return true
+  def boolean isRemovable() {
+    true
   }
 
-  public SshFile getParentFile() {
-    return baseDir
+  def SshFile getParentFile() {
+    baseDir
   }
 
-  public long getLastModified() {
-    return 0
+  def long getLastModified() {
+    0
   }
 
-  public boolean setLastModified(long time) {
-    return true
+  def boolean setLastModified(long time) {
+    true
   }
 
-  public long getSize() {
-    return 0
+  def long getSize() {
+    0
   }
 
-  public boolean mkdir() {
-    return true
+  def boolean mkdir() {
+    true
   }
 
-  public boolean delete() {
-    return true
+  def boolean delete() {
+    true
   }
 
-  public boolean create() throws IOException {
-    return true
+  def boolean create() throws IOException {
+    true
   }
 
-  public void truncate() throws IOException {
+  def void truncate() throws IOException {
   }
 
-  public boolean move(SshFile destination) {
-    return true
+  def boolean move(SshFile destination) {
+    true
   }
 
-  public List<SshFile> listSshFiles() {
-    return new ArrayList<SshFile>()
+  def List<SshFile> listSshFiles() {
+    new ArrayList<SshFile>()
   }
 
-  public OutputStream createOutputStream(long offset) throws IOException {
-    return new ByteArrayOutputStream()
+  def OutputStream createOutputStream(long offset) throws IOException {
+    new ByteArrayOutputStream()
   }
 
-  public InputStream createInputStream(long offset) throws IOException {
-    return new ByteArrayInputStream("data".getBytes("UTF-8"))
+  def InputStream createInputStream(long offset) throws IOException {
+    new ByteArrayInputStream("data".getBytes("UTF-8"))
   }
 
-  public void handleClose() throws IOException {
+  def void handleClose() throws IOException {
   }
 }

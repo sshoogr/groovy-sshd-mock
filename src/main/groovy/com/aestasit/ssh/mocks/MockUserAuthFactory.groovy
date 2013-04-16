@@ -9,13 +9,13 @@ import org.apache.sshd.server.UserAuth
  * @author Andrey Adamovich
  *
  */
-public class MockUserAuthFactory implements NamedFactory<UserAuth> {
+class MockUserAuthFactory implements NamedFactory<UserAuth> {
 
-  public UserAuth create() {
-    return new MockUserAuth()
+  def UserAuth create() {
+    new MockUserAuth()
   }
 
-  public String getName() {
-    return "none"
+  def String getName() {
+    "none"
   }
 }

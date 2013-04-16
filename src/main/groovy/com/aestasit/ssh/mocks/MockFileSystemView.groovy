@@ -11,11 +11,11 @@ import org.apache.sshd.server.SshFile
  */
 class MockFileSystemView implements FileSystemView {
 
-  public SshFile getFile(String file) {
-    return new MockSshFile(file)
+  def SshFile getFile(String file) {
+    new MockSshFile(file)
   }
 
-  public SshFile getFile(SshFile baseDir, String file) {
-    return new MockSshFile(baseDir, file)
+  def SshFile getFile(SshFile baseDir, String file) {
+    new MockSshFile(baseDir, file)
   }
 }
