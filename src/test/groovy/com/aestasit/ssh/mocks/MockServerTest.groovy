@@ -5,6 +5,10 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
+import com.jcraft.jsch.ChannelExec
+import com.jcraft.jsch.JSch
+import com.jcraft.jsch.Session
+
 /**
  * Test for SSH server mocking functionality.
  *
@@ -12,6 +16,8 @@ import org.junit.Test
  *
  */
 class MockServerTest {
+
+  private Session session
 
   @Test
   void testMockSshd() throws Exception {
@@ -41,11 +47,6 @@ drwxr-xr-x 3 1100 1100 4096 Aug  7 16:49 examples
       callback.onExit(0)
     }
 
-    command('timeout') { inp, out, err, callback, env ->
-      Thread.sleep(2000)
-      callback.onExit(0)
-    }
-
     // Create command expectations.
     dir('/tmp/puppet')
 
@@ -53,13 +54,35 @@ drwxr-xr-x 3 1100 1100 4096 Aug  7 16:49 examples
     startSshd(2323)
 
     // Connect to the server
-    // TODO:
+    def jsch = new JSch()
+    def config = new Properties()
+    config.put("StrictHostKeyChecking", "no")
+    config.put("HashKnownHosts",  "yes")
+    jsch.config = config
+    session = jsch.getSession('john', 'localhost', 2323)
+    session.connect()
 
     // Execute commands
-    // TODO:
+    exec('ls -la', 0)
+    exec('du -x', 0)
+    exec('rm -rf /', 0)
+    exec('mess', -1)
+
+    // Disconnect from the server.
+    session.disconnect()
 
     // Stop server.
     stopSshd()
 
   }
+
+  private void exec(String command, int exitStatus) {
+    ChannelExec channel = (ChannelExec) session.openChannel("exec")
+    channel.command = command
+    channel.setPty(true)
+    channel.connect()
+    Thread.sleep(100)
+    assertEquals(exitStatus, channel.exitStatus)
+  }
+
 }

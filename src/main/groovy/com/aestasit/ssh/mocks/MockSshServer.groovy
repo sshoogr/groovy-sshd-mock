@@ -16,8 +16,8 @@ import org.apache.sshd.server.sftp.SftpSubsystem
 final class MockSshServer {
 
   static SshServer sshd
-  static Map files
-  static Map commands
+  static Map files = [:]
+  static Map commands = [:]
 
   /**
    * Starts SSH server.
