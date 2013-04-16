@@ -7,7 +7,7 @@ and file expectations.
 
 ## Usage
 
-First of all you need to statically import `MockSshServer` class to get access to the library functionality. 
+First of all you need to statically import `MockSshServer` class to get access to the library functionality: 
 
     import static com.aestasit.ssh.mocks.MockSshServer.*
 
