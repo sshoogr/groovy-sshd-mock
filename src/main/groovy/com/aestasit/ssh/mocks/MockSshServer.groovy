@@ -60,7 +60,7 @@ final class MockSshServer {
    * @param path the path of the file.
    */
   def static void file(String path) {
-    String fullPath = FilenameUtils.normalizeNoEndSeparator(path, true)
+    String fullPath = FilenameUtils.normalizeNoEndSeparator(path).replaceAll("\\\\", "/")
     dir(FilenameUtils.getPath(fullPath))
     files.put(fullPath, [
       'isDirectory': false,
@@ -74,7 +74,7 @@ final class MockSshServer {
    * @param path the path of the directory.
    */
   def static void dir(String path) {
-    String fullPath = FilenameUtils.normalizeNoEndSeparator(path, true)
+    String fullPath = FilenameUtils.normalizeNoEndSeparator(path).replaceAll("\\\\", "/")
     String nextPath = ''
     fullPath.split('/').each { pathElement ->
       nextPath += '/' + pathElement

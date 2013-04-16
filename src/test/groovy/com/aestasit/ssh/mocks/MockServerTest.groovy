@@ -6,6 +6,7 @@ import static org.junit.Assert.*
 import org.junit.Test
 
 import com.jcraft.jsch.ChannelExec
+import com.jcraft.jsch.ChannelSftp
 import com.jcraft.jsch.JSch
 import com.jcraft.jsch.Session
 
@@ -67,6 +68,11 @@ drwxr-xr-x 3 1100 1100 4096 Aug  7 16:49 examples
     exec('du -x', 0)
     exec('rm -rf /', 0)
     exec('mess', -1)
+
+    // Copy file
+    ChannelSftp channel = (ChannelSftp) session.openChannel("sftp")
+    channel.connect()
+    channel.put(new ByteArrayInputStream("data".getBytes()), "/tmp/puppet/test.txt")
 
     // Disconnect from the server.
     session.disconnect()
