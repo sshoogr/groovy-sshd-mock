@@ -19,12 +19,18 @@ sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
 
 dependencies {
+  groovy localGroovy()
   compile 'org.slf4j:slf4j-api:1.7.2'
   compile 'commons-io:commons-io:2.4'
-  compile('org.apache.sshd:apache-sshd:0.7.0') {
-    exclude module: 'slf4j-simple'
-  }
+  compile('org.apache.sshd:apache-sshd:0.7.0') 
+  compile('com.jcraft:jsch:0.1.49') 
   testCompile 'junit:junit:4.+'
   testCompile 'ch.qos.logback:logback-classic:1.+'
-  groovy localGroovy()
 }
+
+configurations {
+  all*.exclude group: 'commons-logging'
+  all*.exclude group: 'log4j'
+  all*.exclude module: 'slf4j-simple'
+}
+
