@@ -9,7 +9,7 @@ import org.apache.sshd.server.ExitCallback
  * @author Andrey Adamovich
  *
  */
-public class MockCommand implements org.apache.sshd.server.Command {
+class MockCommand implements org.apache.sshd.server.Command {
 
   private ExitCallback callback
   private OutputStream err
