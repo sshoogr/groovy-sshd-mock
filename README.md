@@ -1,8 +1,8 @@
-# A Groovy-based library for mocking SSH server behavior
+# groovy-sshd-mock
 
 ## Overview
 
-The `groovy-sshd-mock` is a simple library to start a mock SSH server within your unit tests. It allows defining command 
+The `groovy-sshd-mock` is a simple Groovy-based library to start a mock SSH server within your unit tests. It allows defining command 
 and file expectations.
 
 ## Usage
