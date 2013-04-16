@@ -16,10 +16,10 @@ Then you can use `command`, `file` and `dir` methods to define SSH server expect
     // Create command expectations.
     command('^ls.*$') { inp, out, err, callback, env ->
       out << '''total 20
-drwxr-xr-x 3 1100 1100 4096 Aug  7 16:52 .
-drwxr-xr-x 8 1100 1100 4096 Aug  1 17:53 ..
-drwxr-xr-x 3 1100 1100 4096 Aug  7 16:49 examples
-'''
+    drwxr-xr-x 3 1100 1100 4096 Aug  7 16:52 .
+    drwxr-xr-x 8 1100 1100 4096 Aug  1 17:53 ..
+    drwxr-xr-x 3 1100 1100 4096 Aug  7 16:49 examples
+    '''
       callback.onExit(0)
     }
 
