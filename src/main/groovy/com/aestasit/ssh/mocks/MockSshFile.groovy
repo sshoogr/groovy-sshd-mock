@@ -10,7 +10,7 @@ import org.apache.sshd.server.SshFile
  */
 class MockSshFile implements SshFile {
 
-  private final String file
+  private final String file
   private final SshFile baseDir
 
   def MockSshFile(String file) {
