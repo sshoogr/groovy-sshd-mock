@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Groovy-sshd-mock by aestasit</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Groovy-sshd-mock</h1>
+        <p>A Groovy-based library for mocking SSH server behaviour inside a unit test.</p>
+
+        <p class="view"><a href="https://github.com/aestasit/groovy-sshd-mock">View the Project on GitHub <small>aestasit/groovy-sshd-mock</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/aestasit/groovy-sshd-mock/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/aestasit/groovy-sshd-mock/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/aestasit/groovy-sshd-mock">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="groovy-sshd-mock" class="anchor" href="#groovy-sshd-mock"><span class="octicon octicon-link"></span></a>groovy-sshd-mock</h1>
+
+<h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>The <code>groovy-sshd-mock</code> is a simple Groovy-based library to start a mock SSH server within your unit tests. It allows defining command 
+and file expectations.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>First of all you need to statically import <code>MockSshServer</code> class to get access to the library functionality: </p>
+
+<pre><code>import static com.aestasit.ssh.mocks.MockSshServer.*
+</code></pre>
+
+<p>Then you can use <code>command</code>, <code>file</code> and <code>dir</code> methods to define SSH server expectations:</p>
+
+<pre><code>// Create command expectations.
+command('^ls.*$') { inp, out, err, callback, env -&gt;
+  out &lt;&lt; '''total 20
+drwxr-xr-x 3 1100 1100 4096 Aug  7 16:52 .
+drwxr-xr-x 8 1100 1100 4096 Aug  1 17:53 ..
+drwxr-xr-x 3 1100 1100 4096 Aug  7 16:49 examples
+'''
+  callback.onExit(0)
+}
+
+// Create file expectations.
+dir('/tmp/puppet')
+</code></pre>
+
+<p>As you can notice, the closure passed to the <code>command</code> method takes 5 parameters that allow influencing the 
+behavior of the mocked remote command. </p>
+
+<p>The <code>inp</code>, <code>out</code>, <code>err</code> parameters are command's standard input, standard output and standard error streams. 
+The <code>callback</code> parameter allows setting exit code for the mocked command to return. The <code>env</code> parameter gives you 
+access to command's environment variables, which will most likely will be useless in a mocked environment.  </p>
+
+<p>After that is done you can start the mock server on a specific port (e.g. <code>2323</code>) and execute your SSH code against that:</p>
+
+<pre><code>// Start server.
+startSshd(2323)
+
+// Execute SSH test code (connect, execute remote commands, transfer filers, disconnect).
+...
+</code></pre>
+
+<p>To keep things clean you can also eventually stop the server:</p>
+
+<pre><code>// Stop server.
+stopSshd()
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/aestasit">aestasit</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
