@@ -45,3 +45,7 @@ To keep things clean you can also eventually stop the server:
 
     // Stop server.
     stopSshd()
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/aestasit/groovy-sshd-mock/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
