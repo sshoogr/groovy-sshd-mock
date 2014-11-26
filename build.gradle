@@ -1,6 +1,6 @@
 
 group = 'com.aestasit.infrastructure.mock'
-version = '0.3'
+version = '0.4-SNAPSHOT'
 
 buildscript {
   repositories { mavenCentral() }
