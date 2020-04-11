@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.aestasit.ssh.mocks
 
-import org.apache.sshd.common.Factory
-import org.apache.sshd.server.Command
-
-/**
- * Mock shell factory.
- *
- * @author Andrey Adamovich
- *
- */
-class MockShellFactory implements Factory<Command> {
-
-  def Command create() {
-    new MockCommand()
+sonarqube {
+  properties {
+    property 'sonar.sources',           'src/main/groovy'
+    property 'sonar.projectName',       "${project.group}:${project.name}"
+    property 'sonar.projectKey',        "${project.group}:${project.name}"
+    property 'sonar.jacoco.reportPath', "${project.buildDir}/jacoco/test.exec"
   }
 }
