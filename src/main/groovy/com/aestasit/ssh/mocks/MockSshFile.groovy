@@ -29,104 +29,104 @@ class MockSshFile implements SshFile {
 
   private final SshFile baseDir
 
-  def MockSshFile(String file) {
+  MockSshFile(String file) {
     super()
     this.file = file
   }
 
-  def MockSshFile(SshFile baseDir, String file) {
+  MockSshFile(SshFile baseDir, String file) {
     super()
     this.baseDir = baseDir
     this.file = file
   }
 
-  def String getAbsolutePath() {
+  String getAbsolutePath() {
     file
   }
 
-  def String getName() {
+  String getName() {
     file
   }
 
-  def String getOwner() {
+  String getOwner() {
     "root"
   }
 
-  def boolean isDirectory() {
+  boolean isDirectory() {
     MockSshServer.files[file]['isDirectory']
   }
 
-  def boolean isFile() {
+  boolean isFile() {
     !MockSshServer.files[file]?.getAt('isDirectory')
   }
 
-  def boolean doesExist() {
+  boolean doesExist() {
     MockSshServer.files[file]?.getAt('doesExist')
   }
 
-  def boolean isReadable() {
+  boolean isReadable() {
     true
   }
 
-  def boolean isWritable() {
+  boolean isWritable() {
     true
   }
 
-  def boolean isExecutable() {
+  boolean isExecutable() {
     true
   }
 
-  def boolean isRemovable() {
+  boolean isRemovable() {
     true
   }
 
-  def SshFile getParentFile() {
+  SshFile getParentFile() {
     baseDir
   }
 
-  def long getLastModified() {
+  long getLastModified() {
     0
   }
 
-  def boolean setLastModified(long time) {
+  boolean setLastModified(long time) {
     true
   }
 
-  def long getSize() {
+  long getSize() {
     0
   }
 
-  def boolean mkdir() {
+  boolean mkdir() {
     true
   }
 
-  def boolean delete() {
+  boolean delete() {
     true
   }
 
-  def boolean create() throws IOException {
+  boolean create() throws IOException {
     true
   }
 
-  def void truncate() throws IOException {
+  void truncate() throws IOException {
   }
 
-  def boolean move(SshFile destination) {
+  boolean move(SshFile destination) {
     true
   }
 
-  def List<SshFile> listSshFiles() {
+  List<SshFile> listSshFiles() {
     new ArrayList<SshFile>()
   }
 
-  def OutputStream createOutputStream(long offset) throws IOException {
+  OutputStream createOutputStream(long offset) throws IOException {
     new ByteArrayOutputStream()
   }
 
-  def InputStream createInputStream(long offset) throws IOException {
+  InputStream createInputStream(long offset) throws IOException {
     new ByteArrayInputStream("data".getBytes("UTF-8"))
   }
 
-  def void handleClose() throws IOException {
+  void handleClose() throws IOException {
   }
 }

@@ -37,7 +37,7 @@ final class MockSshServer {
   /**
    * Starts SSH server.
    */
-  def static void startSshd(int defaultPort = 2222) {
+  static void startSshd(int defaultPort = 2222) {
     sshd = SshServer.setUpDefaultServer()
     sshd.with {
       port = defaultPort
@@ -65,7 +65,7 @@ final class MockSshServer {
    * @param pattern command pattern to match
    * @param cl closure to execute for command.
    */
-  def static void command(String pattern, Closure cl) {
+  static void command(String pattern, Closure cl) {
     commands.put(pattern, cl)
   }
 
@@ -74,7 +74,7 @@ final class MockSshServer {
    *
    * @param path the path of the file.
    */
-  def static void file(String path) {
+  static void file(String path) {
     String fullPath = FilenameUtils.normalizeNoEndSeparator(path).replaceAll("\\\\", "/")
     dir(FilenameUtils.getPath(fullPath))
     files.put(fullPath, [
@@ -88,7 +88,7 @@ final class MockSshServer {
    *
    * @param path the path of the directory.
    */
-  def static void dir(String path) {
+  static void dir(String path) {
     String fullPath = FilenameUtils.normalizeNoEndSeparator(path).replaceAll("\\\\", "/")
     String nextPath = ''
     fullPath.split('/').each { pathElement ->
@@ -103,7 +103,7 @@ final class MockSshServer {
   /**
    * Stops running SSH server.
    */
-  def static void stopSshd() {
+  static void stopSshd() {
     sshd?.stop(true)
   }
 }

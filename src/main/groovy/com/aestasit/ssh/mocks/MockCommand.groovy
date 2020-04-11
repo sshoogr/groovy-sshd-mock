@@ -32,32 +32,32 @@ class MockCommand implements org.apache.sshd.server.Command {
   private InputStream inp
   private final String command
 
-  def MockCommand() {
+  MockCommand() {
     super()
   }
 
-  def MockCommand(String command) {
+  MockCommand(String command) {
     super()
     this.command = command
   }
 
-  def void setInputStream(InputStream inp) {
+  void setInputStream(InputStream inp) {
     this.inp = inp
   }
 
-  def void setOutputStream(OutputStream out) {
+  void setOutputStream(OutputStream out) {
     this.out = out
   }
 
-  def void setErrorStream(OutputStream err) {
+  void setErrorStream(OutputStream err) {
     this.err = err
   }
 
-  def void setExitCallback(ExitCallback callback) {
+  void setExitCallback(ExitCallback callback) {
     this.callback = callback
   }
 
-  def void start(Environment env) throws IOException {
+  void start(Environment env) throws IOException {
     Closure commandCode
     if (command) {
       commandCode = MockSshServer.commands.find { command == it.key || command.matches(it.key) }?.value
@@ -70,6 +70,6 @@ class MockCommand implements org.apache.sshd.server.Command {
     }
   }
 
-  def void destroy() {
+  void destroy() {
   }
 }

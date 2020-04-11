@@ -27,7 +27,7 @@ import org.apache.sshd.server.session.ServerSession
  */
 class MockUserAuth implements UserAuth {
 
-  def Boolean auth(ServerSession session, String username, Buffer buffer) {
+  Boolean auth(ServerSession session, String username, Buffer buffer) {
     true
   }
 }

@@ -26,11 +26,11 @@ import org.apache.sshd.server.UserAuth
  */
 class MockUserAuthFactory implements NamedFactory<UserAuth> {
 
-  def UserAuth create() {
+  UserAuth create() {
     new MockUserAuth()
   }
 
-  def String getName() {
+  String getName() {
     "none"
   }
 }

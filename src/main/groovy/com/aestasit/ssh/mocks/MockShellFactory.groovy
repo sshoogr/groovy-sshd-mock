@@ -26,7 +26,7 @@ import org.apache.sshd.server.Command
  */
 class MockShellFactory implements Factory<Command> {
 
-  def Command create() {
+  Command create() {
     new MockCommand()
   }
 }
