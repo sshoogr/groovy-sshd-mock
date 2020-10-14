@@ -15,49 +15,49 @@
  */
 
 plugins {
-  id 'java-library'
-  id 'groovy'
-  id 'idea'
-  id 'com.aestasit.gradle.plugins.sshoogr-parentpom'
-  id 'org.ajoberstar.git-publish'
-  id 'org.sonarqube'
+    id 'java-library'
+    id 'groovy'
+    id 'idea'
+    id 'org.ajoberstar.git-publish'
+    id 'org.kordamp.gradle.codenarc'
 }
 
 config {
-  info {
-    name          = 'Groovy Sshd Mock'
-    description   = 'A Groovy-based library for mocking SSH server behaviour inside a unit test.'
-    inceptionYear = '2011'
-    tags          = ['ssh', 'mock']
-  }
-
-  quality {
-    codenarc {
-      configFile = project.rootProject.file('src/conf/codenarc/codenarc.groovy')
+    info {
+        name          = 'Groovy Sshd Mock'
+        description   = 'A Groovy-based library for mocking SSH server behaviour inside a unit test.'
+        inceptionYear = '2011'
+        tags          = ['ssh', 'mock']
     }
-  }
-}
 
-apply from: 'gradle/sonar.gradle'
-apply from: 'gradle/docs.gradle'
+    quality {
+        codenarc {
+            configFile = project.rootProject.file('src/conf/codenarc/codenarc.groovy')
+        }
+    }
+}
 
 dependencies {
-  api localGroovy()
-  api "org.slf4j:slf4j-api:${slf4jVersion}"
-  api "commons-io:commons-io:${commonsIOVersion}"
-  api "org.apache.sshd:apache-sshd:${apacheSshdVersion}"
-  api "com.jcraft:jsch:${jschVersion}"
-  testImplementation "junit:junit:${junitVersion}"
-  testRuntimeOnly "ch.qos.logback:logback-core:${logbackVersion}"
-  testRuntimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
+    api "org.codehaus.groovy:groovy:${groovyVersion}"
+    api "org.slf4j:slf4j-api:${slf4jVersion}"
+    api "commons-io:commons-io:${commonsIOVersion}"
+    api "org.apache.sshd:apache-sshd:${apacheSshdVersion}"
+    api "com.jcraft:jsch:${jschVersion}"
+
+    testImplementation "junit:junit:${junitVersion}"
+
+    testRuntimeOnly "ch.qos.logback:logback-core:${logbackVersion}"
+    testRuntimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
 }
 
-configurations {
-  all*.exclude group: 'commons-logging'
-  all*.exclude group: 'log4j'
-  all*.exclude module: 'slf4j-simple'
+gitPublish {
+    repoUri = rootProject.extensions.findByName('config').info.links.scm
+    branch = 'gh-pages'
+    contents {
+        from(groovydoc.outputs.files) {
+            into 'docs/groovydoc'
+        }
+    }
 }
 
-configurations.all {
-  resolutionStrategy.force "org.slf4j:slf4j-api:${slf4jVersion}"
-}
+gitPublishCommit.dependsOn(groovydoc)

@@ -4,7 +4,6 @@
 ![ASL2 Licensed](http://img.shields.io/badge/license-ASL2-blue.svg)
 ![Latest Version](https://api.bintray.com/packages/sshoogr/sshoogr/groovy-sshd-mock/images/download.svg)
 
-
 ## Overview
 
 The `groovy-sshd-mock` is a simple Groovy-based library to start a mock SSH server within your unit tests. It allows defining command 
